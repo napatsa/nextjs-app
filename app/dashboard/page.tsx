@@ -1,5 +1,5 @@
 import { ErrorBoundary } from 'react-error-boundary';
-import Number from '@/components/Number';
+import Number from '@/app/components/number';
 
 export default function Dashboard() {
   return (
