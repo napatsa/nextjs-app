@@ -6,8 +6,8 @@ export default function DashboardLayout({
   return (
     <section>
       {/* Include shared UI here e.g. a header or sidebar */}
-      <nav>dashboard layout</nav>
-      {children}
+      <nav className="mb-4">dashboard layout</nav>
+      <div className="p-5 border-white border-2">{children}</div>
     </section>
   );
 }

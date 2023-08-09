@@ -1,7 +1,5 @@
 import "./globals.css";
 
-import { use, useEffect } from "react";
-
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
