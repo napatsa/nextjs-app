@@ -8,9 +8,10 @@ import { useBoundStore } from '@/app/store';
 
 export default function Dashboard() {
   const fishes = useBoundStore((state) => state.fishes);
-  const [loading, eatFish] = useBoundStore((state) => [
-    state.loading,
-    state.eatFish,
+  const [bears, loading, { eatFish }] = useBoundStore((state) => [
+    state.bears,
+    state.loadingBear,
+    state.actionsBear,
   ]);
 
   useEffect(() => {
@@ -20,6 +21,10 @@ export default function Dashboard() {
   useMemo(() => {
     console.log(loading);
   }, [loading]);
+
+  useEffect(() => {
+    console.log(bears);
+  }, [bears]);
 
   return (
     <div className="bg-pink-300 w-fit">
