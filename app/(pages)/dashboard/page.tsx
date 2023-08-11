@@ -4,7 +4,9 @@ import { useEffect, useMemo } from 'react';
 
 import { ErrorBoundary } from 'react-error-boundary';
 import Number from '@/app/components/number';
+import { getTest } from '@/app/api/test';
 import { useBoundStore } from '@/app/store';
+import { useQuery } from '@tanstack/react-query';
 
 export default function Dashboard() {
   const fishes = useBoundStore((state) => state.fishes);
@@ -13,18 +15,26 @@ export default function Dashboard() {
     state.loadingBear,
     state.actionsBear,
   ]);
+  const { data, status } = useQuery({
+    queryKey: ['test'],
+    queryFn: () => getTest(),
+  });
 
   useEffect(() => {
     eatFish();
   }, []);
 
-  useMemo(() => {
+  useEffect(() => {
     console.log(loading);
   }, [loading]);
 
   useEffect(() => {
-    console.log(bears);
-  }, [bears]);
+    console.log(status);
+  }, [status]);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <div className="bg-pink-300 w-fit">
