@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { ErrorBoundary } from 'react-error-boundary';
 import Number from '@/app/components/number';
@@ -15,9 +15,11 @@ export default function Dashboard() {
     state.loadingBear,
     state.actionsBear,
   ]);
-  const { data, status } = useQuery({
-    queryKey: ['test'],
-    queryFn: () => getTest(),
+  const [testId, setTestId] = useState(0);
+  const { data, status, refetch } = useQuery({
+    queryKey: ['test', testId],
+    queryFn: () => getTest(testId),
+    enabled: testId > 0,
   });
 
   useEffect(() => {
@@ -38,7 +40,15 @@ export default function Dashboard() {
 
   return (
     <div className="bg-pink-300 w-fit">
-      <div>Dashboard</div>
+      <div
+        onClick={() => {
+          setTestId((prev) => prev + 1);
+          // refetch();
+        }}
+        className="cursor-pointer"
+      >
+        Dashboard
+      </div>
       <br />
       <div>
         <ErrorBoundary fallback={<div>...error</div>}>
