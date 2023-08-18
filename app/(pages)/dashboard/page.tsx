@@ -1,14 +1,15 @@
 'use client';
 
+import { QueryClient, useQuery } from '@tanstack/react-query';
 import { useEffect, useMemo, useState } from 'react';
 
 import { ErrorBoundary } from 'react-error-boundary';
 import Number from '@/app/components/number';
 import { getTest } from '@/app/api/test';
 import { useBoundStore } from '@/app/store';
-import { useQuery } from '@tanstack/react-query';
 
 export default function Dashboard() {
+  const queryClient = new QueryClient();
   const fishes = useBoundStore((state) => state.fishes);
   const [bears, loading, { eatFish }] = useBoundStore((state) => [
     state.bears,
@@ -17,9 +18,11 @@ export default function Dashboard() {
   ]);
   const [testId, setTestId] = useState(0);
   const { data, status, refetch } = useQuery({
-    queryKey: ['test', testId],
-    queryFn: () => getTest(testId),
-    enabled: testId > 0,
+    queryKey: ['test'],
+    queryFn: () => getTest(1),
+    refetchInterval: 10000,
+    cacheTime: 0,
+    retry: 0,
   });
 
   useEffect(() => {
@@ -42,7 +45,7 @@ export default function Dashboard() {
     <div className="bg-pink-300 w-fit">
       <div
         onClick={() => {
-          setTestId((prev) => prev + 1);
+          queryClient.invalidateQueries({ queryKey: ['test'] });
           // refetch();
         }}
         className="cursor-pointer"
