@@ -1,6 +1,6 @@
 'use client';
 
-import { QueryClient, useQuery } from '@tanstack/react-query';
+import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useMemo, useState } from 'react';
 
 import { ErrorBoundary } from 'react-error-boundary';
@@ -9,7 +9,7 @@ import { getTest } from '@/app/api/test';
 import { useBoundStore } from '@/app/store';
 
 export default function Dashboard() {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const fishes = useBoundStore((state) => state.fishes);
   const [bears, loading, { eatFish }] = useBoundStore((state) => [
     state.bears,
