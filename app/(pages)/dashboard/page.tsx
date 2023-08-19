@@ -34,8 +34,8 @@ export default function Dashboard() {
   }, [loading]);
 
   useEffect(() => {
-    console.log(status);
-  }, [status]);
+    console.log(isFetching);
+  }, [isFetching]);
 
   useEffect(() => {
     console.log(data);
