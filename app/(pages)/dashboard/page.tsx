@@ -17,12 +17,12 @@ export default function Dashboard() {
     state.actionsBear,
   ]);
   const [testId, setTestId] = useState(0);
-  const { data, status, refetch } = useQuery({
+  const { data, status, refetch, isFetching } = useQuery({
     queryKey: ['test'],
     queryFn: () => getTest(1),
-    refetchInterval: 10000,
     cacheTime: 0,
     retry: 0,
+    enabled: false,
   });
 
   useEffect(() => {
@@ -45,8 +45,8 @@ export default function Dashboard() {
     <div className="bg-pink-300 w-fit">
       <div
         onClick={() => {
-          queryClient.invalidateQueries({ queryKey: ['test'] });
-          // refetch();
+          refetch();
+          // queryClient.invalidateQueries({ queryKey: ['test'] });
         }}
         className="cursor-pointer"
       >
