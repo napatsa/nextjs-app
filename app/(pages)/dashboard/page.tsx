@@ -51,6 +51,7 @@ export default function Dashboard() {
         className="cursor-pointer"
       >
         Dashboard
+        {data?.bank_name}
       </div>
       <br />
       <div>
